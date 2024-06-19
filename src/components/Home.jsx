@@ -24,7 +24,7 @@ const Home = () => {
   const category = useSelector((state) => state.newsSlice.category);
   const loading = useSelector((state) => state.newsSlice.loading);
   useEffect(() => {
-    // dispatch(fetchNews());
+    dispatch(fetchNews());
   }, []);
   const scrollToTop = () => {
     window.scrollTo({
