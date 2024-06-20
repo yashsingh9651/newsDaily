@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { newsByCategory, setCategory } from "../redux/newsSlice";
-import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const categories = [
+    "general",
     "cricket",
     "bussiness",
     "automobiles",
@@ -15,12 +15,11 @@ const Navbar = () => {
   const dispatch = useDispatch();
   return (
     <div className="sticky w-full top-0 p-5 flex justify-between items-center backdrop-blur-md border-b border-gray-300">
-      <Link
-        to={"/"}
-        className="hover:scale-110 duration-150 lg:text-2xl text-lg lg:font-bold font-semibold"
+      <h1
+        className="lg:text-2xl text-lg lg:font-bold font-semibold"
       >
         Daily-News
-      </Link>
+      </h1>
       {/* responsive design */}
       <div className="hidden lg:flex items-center gap-5 text-lg font-semibold capitalize">
         {categories.map((category) => {

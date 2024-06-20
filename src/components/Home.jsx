@@ -6,12 +6,14 @@ import {
   newsByCategory,
   newsByCategoryWithPage,
   setCategory,
+  setCurrentPage,
 } from "../redux/newsSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
   const pages = [1, 2, 3, 4, 5, 6, 7];
   const categories = [
+    "general",
     "cricket",
     "bussiness",
     "automobiles",
@@ -21,21 +23,23 @@ const Home = () => {
   ];
   const news = useSelector((state) => state.newsSlice.news);
   const pagesCount = useSelector((state) => state.newsSlice.pages);
+  const currentPage = useSelector((state) => state.newsSlice.currentPage);
   const category = useSelector((state) => state.newsSlice.category);
   const loading = useSelector((state) => state.newsSlice.loading);
-  useEffect(() => {
-    dispatch(fetchNews());
-  }, []);
+  // Scrolling To top of the window on another page of the news list
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
+  useEffect(() => {
+    dispatch(fetchNews({category,currentPage}));
+  }, []);
   return (
     <>
       {/* Mapping Categories Button */}
-      <div className="flex lg:hidden flex-wrap mt-2 justify-center items-center gap-5 text-base font-semibold capitalize">
+      <div className="flex lg:hidden flex-wrap mt-2 justify-center items-center gap-5 text-base font-semibold capitalize px-3">
         {categories.map((category) => {
           return (
             <h1
@@ -70,7 +74,7 @@ const Home = () => {
                 <div className="h-4 mt-1 bg-gray-300"></div>
               </div>
             ))
-          : // Render news
+          : // Rendering news
             news.map((article) => {
               return (
                 <div
@@ -102,6 +106,7 @@ const Home = () => {
                   key={page}
                   className="px-4 py-2 bg-blue-500 hover:bg-blue-700 duration-150 text-white rounded-md"
                   onClick={() => {
+                    dispatch(setCurrentPage(page));
                     dispatch(newsByCategoryWithPage({ category, page }));
                     scrollToTop();
                   }}
