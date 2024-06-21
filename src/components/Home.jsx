@@ -38,7 +38,7 @@ const Home = () => {
   }, []);
   return (
     <>
-      {/* Mapping Categories Button */}
+      {/* Mapping Categories Button for small devices */}
       <div className="flex lg:hidden flex-wrap mt-2 justify-center items-center gap-5 text-base font-semibold capitalize px-3">
         {categories.map((category) => {
           return (

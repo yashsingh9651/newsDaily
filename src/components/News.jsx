@@ -1,3 +1,4 @@
+// Dynamic Page. This page will show the news article when clicked on the news card.
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
